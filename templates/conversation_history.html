@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Histórico de Conversas - {{ sender }}</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f3f4f6; margin: 0; padding: 0; color: #333; }
+        .container { width: 90%; max-width: 800px; margin: 50px auto; background-color: #ffffff; padding: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); border-radius: 10px; }
+        h1 { text-align: center; color: #333; font-size: 2rem; }
+        .message { padding: 10px; border-bottom: 1px solid #ddd; }
+        .message.user { color: #0056b3; font-weight: bold; }
+        .message.assistant { color: #333; }
+        .timestamp { font-size: 0.8rem; color: #999; }
+        .back-button { display: inline-block; margin-top: 20px; text-decoration: none; color: #007bff; font-weight: bold; }
+        .back-button:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Histórico de Conversas - {{ sender }}</h1>
+        <div>
+            {% for msg in history %}
+                <div class="message {{ msg.role }}">
+                    <p class="timestamp">{{ msg.timestamp }}</p>
+                    <p>{{ msg.content }}</p>
+                </div>
+            {% endfor %}
+        </div>
+        <a href="{{ url_for('get_summary_within_hour') }}" class="back-button">Voltar aos Resumos</a>
+    </div>
+</body>
+</html>
